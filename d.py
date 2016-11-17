@@ -25,7 +25,12 @@ class Vocabulary:
     # If a word has previously been assigned an integer, return that integer.
     #
     def get_int(self, word):
-        pass
+        if word in self.int2word:
+            return self.int2word.index(word)
+        else:
+            self.int2word.append(word)
+            return self.int2word.index(word)
+
 
     # Given a non-negative integer that has been assigned to a word,
     # return the corresponding word.
@@ -33,11 +38,14 @@ class Vocabulary:
     # Otherwise, return the value None
     #
     def get_word(self, i):
-        pass
+        if i < len(self.int2word) and i >= 0:
+            return self.int2word[i]
+        else:
+            return None
 
     # Return the number of words stored in this vocabulary
     def size(self):
-        pass
+        return len(self.int2word)
 
 
 if __name__ == '__main__':
