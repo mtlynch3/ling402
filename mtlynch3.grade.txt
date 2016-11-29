@@ -1,0 +1,11 @@
+__mtlynch3__LING402-HW8-GRADE-RURBRIC__
+
+d.py functions correctly:	11/11
+	def_get_int:			2/2
+	def_get_word:			2/2
+	def_size:			2/2
+	d_output_matches_expected: 	3/3
+	functions_for_other_input: 	2/2
+
+
+__TA-COMMENTS-IF-ANY__

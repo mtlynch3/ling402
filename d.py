@@ -57,10 +57,10 @@ if __name__ == '__main__':
     else:
         words = nltk.word_tokenize("All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.")
         
-        v = Vocabulary()
+    v = Vocabulary()
         
-        for word in words:
-            i = v.get_int(word)
-            w = v.get_word(i)
-            print("{}\t{}\t{}".format(i, w, word))
+    for word in words:
+        i = v.get_int(word)
+        w = v.get_word(i)
+        print("{}\t{}\t{}".format(i, w, word))
 
