@@ -49,7 +49,7 @@ class Conditional:
         ret_str = ""
         for word_e in Vocabulary.words(self.e_vocab):
             for word_f in Vocabulary.words(self.f_vocab):
-                ret_str += self.name + "[" + word_e + " | "+ word_f + "] = "+ str(self.double_dict) + "\n"
+                ret_str += self.name + "[" + word_e + " | "+ word_f + "] = "+ str(self.double_dict[word_e][word_f]) + "\n"
         return ret_str
 
 def create_vocab(words):
