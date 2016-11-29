@@ -2,6 +2,8 @@
 
 import sys
 import nltk
+#for dictionary of dictionaries
+from collections import defaultdict
 
 # Import d.py
 from d import Vocabulary
@@ -16,24 +18,39 @@ class Conditional:
     # HINT: In addition to storing the name and both vocabs,
     #       you will need to store a dictionary of dictionaries
     def __init__(self, name, e_vocab, f_vocab, initial_value):
-        pass
+        self.name = name
+        self.e_vocab = e_vocab
+        self.f_vocab = f_vocab
+        #cast as dict?? self.double_dict = dict(defaultdict(dict))?
+        self.double_dict = defaultdict(dict)
+
+        for word_e in Vocabulary.words(e_vocab):
+            for word_f in Vocabulary.words(f_vocab):
+                self.double_dict[word_e][word_f] = initial_value
 
     # Given an integer index for a word from e and a word from f,
     #    return the corresponding value
     def get(self, e_i, f_i):
-        pass
+        word_e = Vocabulary.get_word(self.e_vocab, e_i)
+        word_f = Vocabulary.get_word(self.f_vocab, f_i)
+        return self.double_dict[word_e][word_f]
 
     # Given an integer index for a word from e and a word from f,
     #    store the value provided
     def set(self, e_i, f_i, value):
-        pass
+        word_e = Vocabulary.get_word(self.e_vocab, e_i)
+        word_f = Vocabulary.get_word(self.f_vocab, f_i)
+        self.double_dict[word_e][word_f] = value
 
     # Return a string representation of this object
     #
     # See c.expected_output and test_c.py for the format of the string
     def __str__(self):
-        pass
-
+        ret_str = ""
+        for word_e in Vocabulary.words(self.e_vocab):
+            for word_f in Vocabulary.words(self.f_vocab):
+                ret_str += self.name + "[" + word_e + " | "+ word_f + "] = "+ str(self.double_dict) + "\n"
+        return ret_str
 
 def create_vocab(words):
     v = Vocabulary()
