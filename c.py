@@ -75,9 +75,9 @@ if __name__ == '__main__':
         
         words_f = nltk.word_tokenize("Todos los seres humanos nacen libres e iguales en dignidad y derechos y, dotados como están de razón y conciencia, deben comportarse fraternalmente los unos con los otros.")
 
-        e_v = create_vocab(words_e)
-        f_v = create_vocab(words_f)
+    e_v = create_vocab(words_e)
+    f_v = create_vocab(words_f)
         
-        count = Conditional("count", e_v, f_v, 0)
-        print(count)
-        print()
+    count = Conditional("count", e_v, f_v, 0)
+    print(count)
+    print()

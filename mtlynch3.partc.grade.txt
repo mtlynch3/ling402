@@ -1,0 +1,12 @@
+__mtlynch3__LING402-HW8-GRADE-RURBRIC__
+
+c.py functions correctly:	10/10
+	def_constructor:		2/2
+	def_get:			2/2
+	def_str:			2/2
+	c_output_matches_expected: 	2/2
+	functions_for_other_input: 	2/2
+
+TOTAL:	10/10
+
+__TA-COMMENTS-IF-ANY__
