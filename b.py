@@ -45,14 +45,21 @@ class ParallelCorpus:
     # Append the list of integers (corresponding to the English sentence) to self.e
     # Append the list of integers (corresponding to the foreign sentence) to self.f
     def add(self, e, f):
-        pass
-
+        words_e = nltk.word_tokenize(e)
+        words_f = nltk.word_tokenize(f)
+        sent_e, sent_f = list(), list()
+        for single_e in words_e:
+            sent_e.append(Vocabulary.get_int(self.e_vocab, single_e))
+        for single_f in words_f:
+            sent_f.append(Vocabulary.get_int(self.f_vocab, single_f))
+        self.e.append(sent_e)
+        self.f.append(sent_f)
 
     # Construct a conditional distribution with the given name.
     #
     # Use the formula given in the supplementary instructions
     def create_uniform_distribution(self, name):
-        pass
+        return Conditional(name, self.e_vocab, self.f_vocab,  1/self.f_vocab.size()) 
 
 
     # Given a sentence index, a scaling factor epsilon, and a conditional distribution,
@@ -62,7 +69,14 @@ class ParallelCorpus:
     #
     # Use the formula given in the supplementary instructions
     def conditional_probability(self, sentence_index, epsilon, conditional):
-        pass
+        sent_e = self.get_e(sentence_index)
+        sent_f = self.get_f(sentence_index)
+        frac = epsilon / (len(sent_f)**len(sent_e))
+        sum_total = 0
+        for i in range(0, len(sent_e)):
+            for j in range(0, len(sent_f)):
+                sum_total += conditional.get(sent_e[i], sent_f[j])
+        return frac * sum_total
 
 
     # Given a conditional distribution and a scaling factor epsilon,
@@ -70,7 +84,10 @@ class ParallelCorpus:
     #
     # Use the formula given in the supplementary instructions
     def perplexity(self, epsilon, conditional):
-        pass
+        sum_total = 0
+        for s in range(0, self.size()):
+            sum_total += math.log2(self.conditional_probability(s, epsilon, conditional))
+        return -1 * sum_total
 
 
 if __name__ == '__main__':
