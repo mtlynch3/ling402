@@ -2,6 +2,7 @@
 
 import sys
 import nltk
+from collections import defaultdict
 
 from d import Vocabulary
 from c import Conditional
@@ -14,19 +15,49 @@ class IBM_Model1:
         self.t = parallel_corpus.create_uniform_distribution("t")
 
     def compute_normalization(self, e_sentence, f_sentence):
-        pass
+        z = dict()
+        for word_e in e_sentence:
+            c_sum = 0
+            for word_f in f_sentence:
+                c_sum += self.t.get(word_e, word_f)
+            z[word_e] = c_sum
+        return z
 
     def update_counts(self, e_sentence, f_sentence, counts, z):
-        pass
+        for word_e in e_sentence:
+            for word_f in f_sentence:
+                counts.set(word_e,word_f,counts.get(word_e,word_f) + (self.t.get(word_e,word_f) / z[word_e]))
         
     def update_totals(self, e_sentence, f_sentence, totals, z):
-        pass
+        for word_e in e_sentence:
+            for word_f in f_sentence:
+                totals[word_f] += self.t.get(word_e,word_f) / z[word_e]
+                
 
     def update_probabilities(self, counts, totals):
-        pass
+        p_size = self.parallel_corpus.size()
+        e_words, f_words = list(), list()
+        for i in range(0, p_size):
+            temp_e = self.parallel_corpus.get_e(i)
+            temp_f = self.parallel_corpus.get_f(i)
+            for word_e in temp_e:
+                e_words.append(word_e)
+            for word_f in temp_f:
+                f_words.append(word_f)
+        for word_e in e_words:
+            for word_f in f_words:
+                self.t.set(word_e, word_f, counts.get(word_e,word_f) / totals[word_f])
 
     def initialize_totals(self):
-        pass
+        totals = dict()
+        f_words = list()
+        for i in range(0, self.parallel_corpus.size()):
+            temp_f = self.parallel_corpus.get_f(i)
+            for word_f in temp_f:
+                f_words.append(word_f)
+        for word in f_words:
+            totals[word] = 0.0
+        return totals
 
     def process_sentence_pair(self, sentence_index, counts, totals):
         e_sentence = self.parallel_corpus.get_e(sentence_index)
