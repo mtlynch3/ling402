@@ -1,0 +1,12 @@
+__mtlynch3__LING402-HW8-GRADE-RURBRIC__
+
+b.py functions correctly:	10/10
+	def_add:				2/2
+	def_create_uniform_distribution:	2/2
+	def_conditional_probability:		2/2
+	def_perplexity:				2/2
+	b_output_matches_expected: 		2/2
+
+TOTAL:	10/10
+
+__TA-COMMENTS-IF-ANY__
