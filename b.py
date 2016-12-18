@@ -110,4 +110,5 @@ if __name__ == '__main__':
     epsilon = 0.01
     t = corpus.create_uniform_distribution("t")
     ppl = corpus.perplexity(epsilon, t)
+    print(t)
     print(ppl)
