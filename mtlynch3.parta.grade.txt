@@ -1,0 +1,12 @@
+__mtlynch3__LING402-HW10-GRADE-RURBRIC__
+
+a.py functions correctly:	10/10
+	def_compute_noramlization:	2/2
+	def_update_counts:		2/2
+	def_update_totals:		2/2
+	def_update_probabilities:	2/2
+	def_initialize_totals: 		2/2
+
+TOTAL:	10/10
+
+__TA-COMMENTS-IF-ANY__
